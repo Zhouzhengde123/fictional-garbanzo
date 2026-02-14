@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Z. Zheng | 艺术策展式教育者</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@200;600&family=Montserrat:wght@100;300;600&display=swap" rel="stylesheet">
     <style>
         :root {
             --m-green: #8da399;
@@ -17,169 +16,244 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background-color: var(--bg); color: var(--text); font-family: 'Montserrat', 'Noto Serif SC', serif; overflow-x: hidden; line-height: 1.8; }
 
-        /* 进度条 */
-        #progress { position: fixed; top: 0; left: 0; height: 3px; background: var(--m-green); z-index: 2000; width: 0%; }
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: "PingFang SC", "Hiragino Sans GB", "serif";
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
 
-        .container { max-width: 1100px; margin: 0 auto; padding: 0 50px; }
+        /* 顶部进度条 */
+        #progress {
+            position: fixed; top: 0; left: 0; height: 3px;
+            background: var(--m-green); z-index: 2000; width: 0%;
+        }
 
-        /* Hero Section */
-        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative; }
-        .hero-bg-text { position: absolute; font-size: 15vw; color: rgba(141, 163, 153, 0.05); font-weight: 900; z-index: -1; pointer-events: none; }
-        .hero h1 { font-size: clamp(50px, 10vw, 90px); font-weight: 100; letter-spacing: 25px; color: var(--m-green); margin-bottom: 20px; text-indent: 25px; }
-        .hero p { font-size: 14px; letter-spacing: 8px; color: var(--m-clay); text-transform: uppercase; }
+        .container { max-width: 1000px; margin: 0 auto; padding: 0 40px; }
 
-        /* Section 通用 */
-        section { padding: 150px 0; opacity: 0; transform: translateY(50px); transition: var(--transition); }
+        /* Hero Section - 恢复冲击力 */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-bg-text {
+            position: absolute;
+            font-size: 15vw;
+            color: rgba(141, 163, 153, 0.05);
+            font-weight: 900;
+            z-index: -1;
+            letter-spacing: 20px;
+        }
+
+        .hero h1 {
+            font-size: clamp(50px, 10vw, 90px);
+            font-weight: 200;
+            letter-spacing: 20px;
+            color: var(--m-green);
+            margin-bottom: 20px;
+            text-indent: 20px;
+        }
+
+        .hero p {
+            font-size: 14px;
+            letter-spacing: 8px;
+            color: var(--m-clay);
+            text-transform: uppercase;
+        }
+
+        /* 章节通用动画 */
+        section { padding: 120px 0; opacity: 0; transform: translateY(40px); transition: var(--transition); }
         section.active { opacity: 1; transform: translateY(0); }
-        .section-title { font-size: 32px; font-weight: 200; color: var(--m-green); margin-bottom: 80px; display: flex; align-items: center; }
-        .section-title::after { content: ""; flex: 1; height: 1px; background: var(--m-grey); margin-left: 30px; }
 
-        /* 关于我 - 交互卡片 */
-        .about-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 80px; }
-        .quote-card { background: var(--white); padding: 50px; border-radius: 2px; position: relative; box-shadow: 20px 20px 60px rgba(0,0,0,0.03); }
-        .quote-card::before { content: "“"; position: absolute; top: 20px; left: 20px; font-size: 80px; color: var(--m-grey); font-family: serif; }
-        
-        /* 技能条升级 */
-        .skill-box { margin-top: 40px; }
-        .skill-item { margin-bottom: 35px; }
-        .skill-info { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 10px; letter-spacing: 1px; }
-        .skill-bar { height: 2px; background: var(--m-grey); position: relative; overflow: hidden; }
-        .skill-fill { height: 100%; background: var(--m-green); width: 0; transition: 2s cubic-bezier(0.2, 1, 0.3, 1); }
+        .section-title {
+            font-size: 28px;
+            font-weight: 300;
+            color: var(--m-green);
+            margin-bottom: 60px;
+            display: flex;
+            align-items: center;
+        }
+        .section-title::after {
+            content: ""; flex: 1; height: 1px; background: var(--m-grey); margin-left: 30px;
+        }
 
-        /* 核心履历 - 丰富内容 */
-        .exp-timeline { position: relative; }
-        .exp-item { background: var(--white); padding: 50px; margin-bottom: 40px; border-radius: 0 30px 0 30px; transition: var(--transition); border: 1px solid transparent; }
-        .exp-item:hover { transform: scale(1.02); border-color: var(--m-green); box-shadow: 0 30px 60px rgba(141, 163, 153, 0.1); }
-        .exp-tag { font-size: 12px; color: var(--m-clay); margin-bottom: 15px; display: block; font-weight: 600; }
-        .exp-item h3 { font-size: 22px; margin-bottom: 20px; font-weight: 500; }
-        .exp-item ul { list-style: none; font-size: 14px; color: #777; }
-        .exp-item li { margin-bottom: 10px; position: relative; padding-left: 20px; }
-        .exp-item li::before { content: "•"; position: absolute; left: 0; color: var(--m-green); }
+        /* 关于我卡片 */
+        .philosophy-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px; }
+        .quote-box {
+            background: var(--white);
+            padding: 50px;
+            box-shadow: 20px 20px 60px rgba(0,0,0,0.02);
+            border-radius: 2px;
+            border-left: 5px solid var(--m-green);
+        }
 
-        /* 视频模块 */
-        .video-section { background: #f0eee9; padding: 100px 50px; border-radius: 4px; margin: 50px 0; }
-        video { width: 100%; border-radius: 4px; box-shadow: 0 30px 80px rgba(0,0,0,0.2); }
+        /* 技能条 */
+        .skill-item { margin-bottom: 30px; }
+        .skill-info { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 10px; color: var(--m-clay); }
+        .skill-bar { height: 2px; background: var(--m-grey); position: relative; }
+        .skill-fill { height: 100%; background: var(--m-green); width: 0; transition: 2s ease-out; }
 
-        /* 荣誉墙 - 动态感 */
-        .honor-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
-        .honor-card { background: var(--white); padding: 30px; display: flex; align-items: center; justify-content: space-between; transition: 0.3s; }
-        .honor-card:hover { background: var(--m-green); color: white; }
-        .honor-card:hover span { color: white; }
+        /* 视频模块 - 旗舰级包装 */
+        .video-wrapper {
+            background: var(--white);
+            padding: 20px;
+            border-radius: 4px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.05);
+        }
 
-        /* 爱好展示 - 交互图标 */
-        .hobby-flex { display: flex; justify-content: space-around; padding: 50px 0; }
-        .hobby-unit { text-align: center; cursor: pointer; transition: 0.3s; }
-        .hobby-unit:hover { transform: translateY(-10px); color: var(--m-green); }
-        .hobby-unit i { font-size: 30px; display: block; margin-bottom: 10px; }
+        .bilibili-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            background: #000;
+            border-radius: 4px;
+        }
 
-        footer { padding: 120px 0; text-align: center; border-top: 1px solid var(--m-grey); }
-        .cta-btn { display: inline-block; padding: 15px 40px; border: 1px solid var(--m-green); color: var(--m-green); text-decoration: none; font-size: 13px; letter-spacing: 3px; transition: 0.3s; }
+        .bilibili-container iframe {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            border: none;
+        }
+
+        /* 履历卡片 - 错位美感 */
+        .exp-card {
+            background: var(--white);
+            padding: 40px;
+            margin-bottom: 30px;
+            transition: var(--transition);
+            border: 1px solid transparent;
+        }
+        .exp-card:hover {
+            transform: scale(1.02);
+            border-color: var(--m-green);
+        }
+        .exp-card h3 { font-size: 20px; margin-bottom: 15px; font-weight: 500; }
+        .exp-card ul { list-style: none; font-size: 14px; color: #777; }
+        .exp-card li { margin-bottom: 8px; padding-left: 15px; position: relative; }
+        .exp-card li::before { content: "•"; position: absolute; left: 0; color: var(--m-green); }
+
+        /* 荣誉列表 */
+        .honor-item {
+            padding: 25px 0;
+            border-bottom: 1px solid var(--m-grey);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: 0.3s;
+        }
+        .honor-item:hover { padding-left: 20px; color: var(--m-green); }
+
+        footer { padding: 100px 0; text-align: center; border-top: 1px solid var(--m-grey); }
+        .cta-btn {
+            display: inline-block;
+            padding: 15px 40px;
+            border: 1px solid var(--m-green);
+            color: var(--m-green);
+            text-decoration: none;
+            font-size: 13px;
+            letter-spacing: 3px;
+            transition: 0.3s;
+        }
         .cta-btn:hover { background: var(--m-green); color: white; }
 
-        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 45px; }
+            .philosophy-grid { grid-template-columns: 1fr; }
+            .container { padding: 0 25px; }
+        }
     </style>
 </head>
 <body>
 
     <div id="progress"></div>
 
-    <!-- Hero -->
-    <section class="hero active" style="opacity: 1; transform: translateY(0);">
-        <div class="hero-bg-text">AESTHETIC</div>
-        <p>INFP · Keyboard Educator · Artist</p>
+    <section class="hero" style="opacity: 1; transform: translateY(0);">
+        <div class="hero-bg-text">ARTIST</div>
         <h1>Z. ZHENG</h1>
-        <div style="width: 1px; height: 100px; background: var(--m-green); margin-top: 50px; animation: pulse 2s infinite;"></div>
+        <p>Keyboard Educator & Choral Conductor</p>
     </section>
 
     <div class="container">
         
-        <!-- Philosophy -->
+        <!-- 教育哲学 -->
         <section id="philosophy">
             <h2 class="section-title">教育哲学 / PHILOSOPHY</h2>
-            <div class="about-grid">
-                <div class="quote-card">
-                    <p style="font-size: 15px; font-style: italic; color: #666;">
-                        “我不只是在教授如何敲击琴键，我是在引导孩子们如何在嘈杂的世界中，通过黑白键的缝隙，去捕捉那一丝属于自己的宁静回声。”
+            <div class="philosophy-grid">
+                <div class="quote-box">
+                    <p style="font-style: italic; color: #666; font-size: 15px;">
+                        “我不只是在教授如何敲击琴键，我是在引导孩子们如何在嘈杂的世界中，通过黑白键的缝隙，去捕捉属于自己的宁静回声。”
                     </p>
-                    <div class="skill-box">
-                        <div class="skill-item">
-                            <div class="skill-info"><span>键盘教育与视奏艺术 Piano & Sight-reading</span><span>95%</span></div>
-                            <div class="skill-bar"><div class="skill-fill" data-percent="95%"></div></div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-info"><span>合唱指挥与情感编排 Choral Direction</span><span>90%</span></div>
-                            <div class="skill-bar"><div class="skill-fill" data-percent="90%"></div></div>
-                        </div>
+                </div>
+                <div class="skills">
+                    <div class="skill-item">
+                        <div class="skill-info"><span>钢琴演奏与视奏艺术 Piano/Sight-reading</span><span>95%</span></div>
+                        <div class="skill-bar"><div class="skill-fill" data-percent="95%"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info"><span>合唱指挥与情感编排 Choral Direction</span><span>90%</span></div>
+                        <div class="skill-bar"><div class="skill-fill" data-percent="90%"></div></div>
                     </div>
                 </div>
-                <div style="padding-top: 20px;">
-                    <h3 style="margin-bottom: 20px; font-weight: 500;">共情式艺术策展人</h3>
-                    <p style="font-size: 14px; color: #888; text-align: justify;">
-                        作为一名 INFP 调停者，我深信艺术教育的本质是“共情”。在三年的公立教学实践中，我独立研发了《沉静之响》节奏教学法，将枯燥的乐理转化为视觉化的叙事体验。我不仅精通钢琴与手风琴的演奏，更擅长将舞台表演的张力转化为课堂的生命力。
-                    </p>
+            </div>
+        </section>
+
+        <!-- 视频展示 -->
+        <section id="video">
+            <h2 class="section-title">现场实录 / PERFORMANCE</h2>
+            <div class="video-wrapper">
+                <div class="bilibili-container">
+                    <iframe 
+                        src="https://player.bilibili.com/player.html?bvid=BV1GvcWz6E9r&page=1&high_quality=1&danmaku=0" 
+                        allowfullscreen="allowfullscreen" 
+                        scrolling="no" 
+                        frameborder="0" 
+                        sandbox="allow-top-navigation allow-same-origin allow-forms allow-scripts">
+                    </iframe>
                 </div>
+                <p style="text-align: center; margin-top: 20px; font-size: 13px; color: #999; font-style: italic;">
+                    2024 山东省教师合唱节 · 一等奖第一名作品展示
+                </p>
             </div>
         </section>
 
-        <!-- Video -->
-        <section id="performance">
-            <h2 class="section-title">艺术实录 / PERFORMANCE</h2>
-            <div class="video-section">
-                <p style="font-size: 12px; color: var(--m-green); margin-bottom: 20px; letter-spacing: 2px;">LIVE: 2024 省级教师合唱节一等奖第一名作品展示</p>
-                <video controls poster="https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&q=80&w=2000">
-                    <source src="video.mp4" type="video/mp4">
-                </video>
-            </div>
-        </section>
-
-        <!-- Experience -->
+        <!-- 履历 -->
         <section id="experience">
-            <h2 class="section-title">职业履历 / EXPERIENCE</h2>
-            <div class="exp-timeline">
-                <div class="exp-item">
-                    <span class="exp-tag">2021.09 - PRESENT</span>
-                    <h3>某省级示范性中心小学 · 核心教师</h3>
-                    <ul>
-                        <li><b>艺术梯队建设：</b> 统筹全校音乐教育资源，成功构建校级合唱团梯队，成员规模达120人。</li>
-                        <li><b>指挥与编排：</b> 担任常任指挥，带领团队在省级合唱节中击败众多对手，斩获一等奖第一名。</li>
-                        <li><b>课程创新：</b> 独立开发“视觉音乐”跨界课程，将手风琴演奏与多媒体叙事结合，获市级教学创新奖。</li>
-                    </ul>
-                </div>
-                <div class="exp-item">
-                    <span class="exp-tag">ACADEMIC BACKGROUND</span>
-                    <h3>某知名师范大学 · 键盘教育专业</h3>
-                    <ul>
-                        <li><b>专业造诣：</b> 师从名家，深耕钢琴演奏法与手风琴器乐理论，以专业前3%成绩毕业。</li>
-                        <li><b>跨界实践：</b> 曾任学院合唱团钢琴伴奏，具备极强的复杂乐谱即时视奏能力及现场协作力。</li>
-                    </ul>
-                </div>
+            <h2 class="section-title">职业履历 / PROFILE</h2>
+            <div class="exp-card">
+                <p style="font-size: 12px; color: var(--m-clay); margin-bottom: 10px;">2021.09 - PRESENT</p>
+                <h3>某省级示范中心小学 · 核心教师</h3>
+                <ul>
+                    <li><b>梯队建设：</b> 负责校级艺术梯队构建，合唱团规模达120人。</li>
+                    <li><b>指挥艺术：</b> 担任常任指挥，带队斩获省级合唱节最高荣誉。</li>
+                    <li><b>教学创新：</b> 独立开发跨界艺术课程，获市级教学创新奖。</li>
+                </ul>
+            </div>
+            <div class="exp-card">
+                <p style="font-size: 12px; color: var(--m-clay); margin-bottom: 10px;">ACADEMIC BACKGROUND</p>
+                <h3>某知名师范大学 · 键盘教育</h3>
+                <ul>
+                    <li><b>专业深度：</b> 系统研习键盘演奏理论，以专业前3%成绩毕业。</li>
+                    <li><b>视奏协作：</b> 具备极强的复杂乐谱即时视奏能力及现场协作力。</li>
+                </ul>
             </div>
         </section>
 
-        <!-- Achievements -->
+        <!-- 荣誉 -->
         <section id="honors">
             <h2 class="section-title">荣誉勋章 / HONORS</h2>
-            <div class="honor-grid">
-                <div class="honor-card"><span>2024 山东省教师合唱节一等奖(TOP 1)</span><b>🏆</b></div>
-                <div class="honor-card"><span>2022 世界合唱比赛 (WCG) 金奖</span><b>🥇</b></div>
-                <div class="honor-card"><span>某市级大剧院特聘钢琴伴奏</span><b>🎹</b></div>
-                <div class="honor-card"><span>某区音乐家协会理事单位</span><b>🏛️</b></div>
-                <div class="honor-card"><span>全国大学生创意创新大赛一等奖</span><b>🌟</b></div>
-                <div class="honor-card"><span>天津市文艺汇演一等奖</span><b>🎭</b></div>
-            </div>
-        </section>
-
-        <!-- Hobbies -->
-        <section id="hobbies">
-            <h2 class="section-title">生活美学 / LIFE</h2>
-            <div class="hobby-flex">
-                <div class="hobby-unit"><i>🏊‍♂️</i><span>游泳 / 意志</span></div>
-                <div class="hobby-unit"><i>🎵</i><span>音乐 / 灵魂</span></div>
-                <div class="hobby-unit"><i>🎬</i><span>电影 / 叙事</span></div>
-                <div class="hobby-unit"><i>🎮</i><span>游戏 / 交互</span></div>
-            </div>
+            <div class="honor-item"><span>山东省教师合唱节一等奖 (TOP 1)</span><span style="color:var(--m-clay)">2024</span></div>
+            <div class="honor-item"><span>世界合唱比赛 (WCG) 金奖</span><span style="color:var(--m-clay)">2022</span></div>
+            <div class="honor-item"><span>某市级大剧院特聘钢琴伴奏</span><span style="color:var(--m-clay)">PRESENT</span></div>
+            <div class="honor-item"><span>某区音乐家协会理事单位</span><span style="color:var(--m-clay)">MEMBER</span></div>
         </section>
 
     </div>
@@ -187,20 +261,18 @@
     <footer>
         <p style="margin-bottom: 30px; font-weight: 200; letter-spacing: 5px;">既然是INFP，我更懂如何挖掘你灵魂里的闪光点</p>
         <a href="#" class="cta-btn">私信定制同款网页简历</a>
-        <p style="margin-top: 50px; font-size: 10px; color: #ccc;">© 2024 ZHOU ZHENG | ARTIST CURATION</p>
     </footer>
 
     <script>
+        // 滚动逻辑
         const sections = document.querySelectorAll('section');
         const progress = document.getElementById('progress');
 
         window.addEventListener('scroll', () => {
-            // 进度条
             const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
             const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
             progress.style.width = (winScroll / height) * 100 + "%";
 
-            // 滚动显现
             sections.forEach(sec => {
                 const top = sec.getBoundingClientRect().top;
                 if (top < window.innerHeight - 100) {
